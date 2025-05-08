@@ -19,7 +19,7 @@ const intervalId = setInterval(() => {
      const buttonelement = document.querySelector('#OnsongButton');
       if (!buttonelement) {
 
-          $("#ChordSheetViewerFontScaler").prepend("<button style='background-color: mediumvioletred;border: none;color: white;padding: 12px 50px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;border-radius: 6px;cursor: pointer;transition: background-color 0.3s ease;font-family: Arial, sans-serif;margin: 20px;' id='OnsongButton'>Show Onsong Sheet</button>");
+          $("#ChordSheetViewerFontScaler").prepend("<button style='background-color: mediumvioletred;border: none;color: white;padding: 12px 50px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;border-radius: 6px;cursor: pointer;transition: background-color 0.3s ease;font-family: Arial, sans-serif;margin: 20px;' id='OnsongButton'>Show Onsong sheet</button>");
           document.getElementById('OnsongButton').addEventListener('click', function() {
               ShowOnsong();
           });
@@ -31,10 +31,6 @@ const intervalId = setInterval(() => {
     'use strict';
 
     console.log("Songselect Extractor von Mark Erhard startet. Tastenkombination Alt + S ist jetzt aktiv.");
-
-
-
-
     document.addEventListener('keydown', function (e) {
         if (e.altKey && e.key === 's') { // Alt+S als Auslöser
             ShowOnsong();
@@ -59,16 +55,12 @@ function ShowOnsong(){
             onsong += $(SR).find(".cproAuthors").text() + "<br />\n";
             onsong += "Key: " + $(SR).find(".cproSongKey").text() + "<br />\n";
 
-
-
             var TempoTime = $(SR).find(".cproTempoTimeWrapper").text() + "<br />\n";
             var Tempo = TempoTime.substring(0, TempoTime.indexOf("|"));
             var Tempo = Tempo.replace(/\D/g,'');
             onsong += "Tempo: " + Tempo + "<br />\n";
 
-
             onsong += "CCLI: " + $(SR).find(".copyright-info .songnumber").text().replace(/\D/g,'') + "<br />\n";
-
 
             $(SR).find(".cproSongSection").each(function(){
 
@@ -83,21 +75,15 @@ function ShowOnsong(){
                             onsong += "[" + $(this).find(".chord").text() + "]";
 
                             onsong += $(this).find(".chordLyrics").text();
-
                         }
 
                         else {
-
                             onsong += $(this).text();
-
                         }
-
                     });
 
                     if (!$(this).is(":last-child")){
-
                         onsong += "<br />\n";
-
                     }
 
                 });
@@ -109,32 +95,25 @@ function ShowOnsong(){
 
 
             $("body").append("<div id='onsongexport-background' style='position: fixed;top: 0px;left: 0px;right: 0px;bottom: 0px;background: rgba(0,0,0,0.4);z-index: 10000;'></div>");
-
             $("body").append("<div id='onsongexport-display' style='position: fixed;top: 100px;left: 100px;right: 100px;bottom: 100px;overflow-y: scroll;border-radius: 18px;background: lightsteelblue;color: black;z-index: 100000;border: 3px solid darkslategray;padding: 35px;font-size: 20px;'>" + onsong + "</div>");
-
             $("#onsongexport-background").on("click",function(){
 
                 $("#onsongexport-background,#onsongexport-display").remove();
 
             });
-
         }
 
         else {
-
             alert("Die Aktuelle Seite ist Entweder keine Songselect Seite, oder dieses Liedblatt kann nicht extrahiert werden.");
-
         }
 
         //copyTextToClipboard($("#onsongexport-display").text());
-
         selectText("onsongexport-display");
-
         /* Bookmarklet Ende*/
 
     }
 
-    function selectText(id){
+function selectText(id){
         var sel, range;
         var el = document.getElementById(id); //get element id
         if (window.getSelection && document.createRange) { //Browser compatibility
